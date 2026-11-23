@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alima</title>
+  <!-- Importing beautiful fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,21 +14,58 @@
     <h1>Alima</h1>
     <p class="subtitle">A little home for you, from far away</p>
     
-    <!-- Her favorite view -->
     <div class="favorite-photo">
       <img src="https://i.ibb.co/XgH3YP7/IMG-20261123-WA0504.jpg" alt="Your favorite view">
       <p class="photo-caption">Your favorite view. I hope it brings you peace today.</p>
     </div>
   </header>
 
-  <!-- 1. REASONS WALL -->
+  <!-- MUSIC PLAYER -->
+  <section class="card music-card">
+    <h2>🎵 A Song For You</h2>
+    <p>Press play and think of me.</p>
+    <div class="player-container">
+      <!-- A sweet, royalty-free chill romantic track -->
+      <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
+      </audio>
+      <button id="playBtn" onclick="toggleMusic()">▶ Play</button>
+      <div class="music-waves">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOVE LETTER -->
+  <section class="card letter-card">
+    <h2>A Little Love Letter</h2>
+    <p>Read this whenever you need a reminder.</p>
+    <button onclick="showLoveLetter()" class="love-btn">Open Letter 💌</button>
+    <div id="hiddenLetter" class="hidden-letter">
+      <p>Hey Alima,</p>
+      <p>I know we are miles apart right now, but I wanted you to have a place that is just yours. A place where you can escape, smile, and remember how incredibly special you are.</p>
+      <p>You deserve the world, and until I can give it to you in person, I made this little corner of the internet. I hope it makes you feel loved, because you are.</p>
+      <p>Keep shining, keep smiling, and remember I'm always here.</p>
+      <p>— Yours</p>
+    </div>
+  </section>
+
+  <!-- REASONS WALL -->
   <section class="card">
     <h2>Reasons You're Amazing</h2>
     <p>Tap each card to reveal a reason.</p>
     <div id="reasonsWall" class="reasons-grid"></div>
   </section>
 
-  <!-- 3. OPEN WHEN LETTERS -->
+  <!-- MEMORY MATCH GAME -->
+  <section class="card">
+    <h2>Memory Match</h2>
+    <p>Match the pairs to win!</p>
+    <div id="memoryGame" class="memory-grid"></div>
+    <p id="gameStatus" class="game-status"></p>
+  </section>
+
+  <!-- OPEN WHEN LETTERS -->
   <section class="card">
     <h2>Open When...</h2>
     <p>Pick a mood. A letter is waiting.</p>
@@ -34,14 +73,7 @@
     <div id="letterContent" class="letter-box hidden"></div>
   </section>
 
-  <!-- 4. SONG OF THE DAY -->
-  <section class="card">
-    <h2>Song of the Day</h2>
-    <p id="songDisplay">Loading...</p>
-    <button onclick="nextSong()">Another one</button>
-  </section>
-
-  <!-- 6. CHEER ME UP GAME -->
+  <!-- CHEER ME UP GAME -->
   <section class="card">
     <h2>Cheer Me Up</h2>
     <p>Tap the heart. Collect smiles.</p>
@@ -52,22 +84,10 @@
     </div>
   </section>
 
-  <!-- 9. DAILY DOSE -->
-  <section class="card">
-    <h2>Daily Dose</h2>
-    <div class="dose-grid">
-      <div><strong>Compliment</strong><p id="doseCompliment">--</p></div>
-      <div><strong>Memory</strong><p id="doseMemory">--</p></div>
-      <div><strong>Song</strong><p id="doseSong">--</p></div>
-      <div><strong>Quote</strong><p id="doseQuote">--</p></div>
-    </div>
-    <button onclick="refreshDose()">New Dose</button>
-  </section>
-
   <footer>
     <p>Made with care, for Alima</p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-                                  </html>
+</html>
