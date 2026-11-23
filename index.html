@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alima</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Alima</h1>
+    <p class="subtitle">A little home for you, from far away</p>
+    
+    <!-- Her favorite view -->
+    <div class="favorite-photo">
+      <img src="https://i.ibb.co/XgH3YP7/IMG-20261123-WA0504.jpg" alt="Your favorite view">
+      <p class="photo-caption">Your favorite view. I hope it brings you peace today.</p>
+    </div>
+  </header>
+
+  <!-- 1. REASONS WALL -->
+  <section class="card">
+    <h2>Reasons You're Amazing</h2>
+    <p>Tap each card to reveal a reason.</p>
+    <div id="reasonsWall" class="reasons-grid"></div>
+  </section>
+
+  <!-- 3. OPEN WHEN LETTERS -->
+  <section class="card">
+    <h2>Open When...</h2>
+    <p>Pick a mood. A letter is waiting.</p>
+    <div id="lettersButtons" class="letters-grid"></div>
+    <div id="letterContent" class="letter-box hidden"></div>
+  </section>
+
+  <!-- 4. SONG OF THE DAY -->
+  <section class="card">
+    <h2>Song of the Day</h2>
+    <p id="songDisplay">Loading...</p>
+    <button onclick="nextSong()">Another one</button>
+  </section>
+
+  <!-- 6. CHEER ME UP GAME -->
+  <section class="card">
+    <h2>Cheer Me Up</h2>
+    <p>Tap the heart. Collect smiles.</p>
+    <div id="gameArea" class="game-area">
+      <div id="heartBtn" onclick="tapHeart()">❤️</div>
+      <p id="score">Smiles: 0</p>
+      <p id="compliment" class="compliment"></p>
+    </div>
+  </section>
+
+  <!-- 9. DAILY DOSE -->
+  <section class="card">
+    <h2>Daily Dose</h2>
+    <div class="dose-grid">
+      <div><strong>Compliment</strong><p id="doseCompliment">--</p></div>
+      <div><strong>Memory</strong><p id="doseMemory">--</p></div>
+      <div><strong>Song</strong><p id="doseSong">--</p></div>
+      <div><strong>Quote</strong><p id="doseQuote">--</p></div>
+    </div>
+    <button onclick="refreshDose()">New Dose</button>
+  </section>
+
+  <footer>
+    <p>Made with care, for Alima</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+                                  </html>
