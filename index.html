@@ -335,33 +335,13 @@
        JAVASCRIPT - THE MAGIC
     ========================================== */
 
-    // 1. MUSIC PLAYER
+    // 1. MUSIC PLAYER (Smart Fetch System)
     const playlistData = [
-      { 
-        title: "Mary On A Cross", 
-        artist: "Ghost",
-        src: "https://archive.org/download/ghost-mary-on-a-cross-official-audio/Ghost%20-%20Mary%20On%20A%20Cross%20(Official%20Audio).mp3" 
-      },
-      { 
-        title: "Die With A Smile", 
-        artist: "Lady Gaga & Bruno Mars",
-        src: "https://archive.org/download/lady-gaga-bruno-mars-die-with-a-smile/Lady%20Gaga%2C%20Bruno%20Mars%20-%20Die%20With%20A%20Smile.mp3" 
-      },
-      { 
-        title: "Golden", 
-        artist: "Harry Styles",
-        src: "https://archive.org/download/harry-styles-golden-official-audio/Harry%20Styles%20-%20Golden%20(Official%20Audio).mp3" 
-      },
-      { 
-        title: "Calm Down", 
-        artist: "Rema",
-        src: "https://archive.org/download/rema-calm-down/Rema%20-%20Calm%20Down.mp3" 
-      },
-      { 
-        title: "Snooze", 
-        artist: "SZA",
-        src: "https://archive.org/download/sza-snooze/SZA%20-%20Snooze.mp3" 
-      }
+      { title: "Mary On A Cross", artist: "Ghost", search: "Mary On A Cross Ghost" },
+      { title: "Die With A Smile", artist: "Lady Gaga & Bruno Mars", search: "Die With A Smile Lady Gaga" },
+      { title: "Golden", artist: "Harry Styles", search: "Golden Harry Styles" },
+      { title: "Calm Down", artist: "Rema", search: "Calm Down Rema" },
+      { title: "Snooze", artist: "SZA", search: "Snooze SZA" }
     ];
 
     const audioPlayer = document.getElementById("bgMusic");
@@ -383,14 +363,37 @@
       playlistContainer.appendChild(div);
     });
 
-    function playSong(index) {
+    async function playSong(index) {
+      // If clicking the same song, just pause/play
       if (currentSongIndex === index) {
         if (audioPlayer.paused) audioPlayer.play();
         else audioPlayer.pause();
-      } else {
-        currentSongIndex = index;
-        audioPlayer.src = playlistData[index].src;
-        audioPlayer.play().catch(e => alert("Tap again to allow audio."));
+        return;
+      }
+
+      const songItem = document.getElementById(`song-${index}`);
+      const icon = songItem.querySelector(".play-icon");
+      
+      // Show loading state
+      icon.innerText = "⏳";
+      
+      try {
+        // Automatically find the audio from Apple's database
+        const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(playlistData[index].search)}&entity=song&limit=1`);
+        const data = await response.json();
+        
+        if (data.results.length > 0) {
+          const previewUrl = data.results[0].previewUrl;
+          audioPlayer.src = previewUrl;
+          currentSongIndex = index;
+          await audioPlayer.play();
+        } else {
+          alert("Song not found. Try another!");
+          icon.innerText = "▶";
+        }
+      } catch (error) {
+        alert("Network error. Try again!");
+        icon.innerText = "▶";
       }
       updatePlayerUI();
     }
@@ -410,10 +413,6 @@
 
     audioPlayer.onpause = updatePlayerUI;
     audioPlayer.onplay = updatePlayerUI;
-    audioPlayer.onerror = () => {
-      alert("This song link is temporarily down. Please try another one!");
-      updatePlayerUI();
-    };
 
     // 2. LOVE LETTER
     function showLoveLetter() {
