@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alima</title>
-  <!-- Importing beautiful fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -20,18 +19,19 @@
     </div>
   </header>
 
-  <!-- MUSIC PLAYER -->
+  <!-- MUSIC PLAYER WITH PLAYLIST -->
   <section class="card music-card">
-    <h2>🎵 A Song For You</h2>
-    <p>Press play and think of me.</p>
+    <h2>🎵 Our Playlist</h2>
+    <p>Pick a song and think of me.</p>
+    
     <div class="player-container">
-      <!-- A sweet, royalty-free chill romantic track -->
-      <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mpeg">
-      </audio>
-      <button id="playBtn" onclick="toggleMusic()">▶ Play</button>
-      <div class="music-waves">
-        <span></span><span></span><span></span><span></span><span></span>
+      <!-- The audio element is controlled by JavaScript now -->
+      <audio id="bgMusic" loop></audio>
+      
+      <button id="playBtn" onclick="toggleMusic()" style="display: none;">▶ Play</button>
+      
+      <div class="playlist" id="playlist">
+        <!-- Songs will be loaded here by JavaScript -->
       </div>
     </div>
   </section>
