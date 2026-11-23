@@ -5,7 +5,256 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alima</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* ==========================================
+       CSS - THE DESIGN
+    ========================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+      min-height: 100vh;
+      padding: 25px 15px;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      color: #fff;
+      font-style: italic;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .favorite-photo {
+      background: white;
+      padding: 10px 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 500px;
+      margin: 0 auto;
+      transform: rotate(-1.5deg);
+    }
+
+    .favorite-photo img {
+      width: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+      max-height: 350px;
+    }
+
+    .photo-caption {
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 12px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 22px;
+      margin: 0 auto 22px;
+      max-width: 520px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      color: #d6336c;
+      margin-bottom: 6px;
+      font-size: 1.3rem;
+    }
+
+    .card > p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #d6336c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    /* MUSIC PLAYLIST */
+    .playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .song-item {
+      background: #fdf5f8;
+      border: 1px solid #f0c4d6;
+      border-radius: 12px;
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #d6336c;
+    }
+
+    .song-item:hover {
+      background: #fce8f1;
+    }
+
+    .song-item.active {
+      background: #d6336c;
+      color: white;
+      border-color: #d6336c;
+    }
+
+    .song-info strong {
+      font-size: 0.95rem;
+    }
+
+    .song-info span {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .play-icon {
+      font-size: 1.2rem;
+    }
+
+    /* LOVE LETTER */
+    .love-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #d6336c, #f06595);
+      font-size: 1rem;
+    }
+
+    .hidden-letter {
+      display: none;
+      margin-top: 20px;
+      background: #fff9fb;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px dashed #d6336c;
+      line-height: 1.6;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .hidden-letter p {
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .hidden-letter.show {
+      display: block;
+    }
+
+    /* GAMES */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .memory-card {
+      background: #fdf5f8;
+      border: 1px solid #f0c4d6;
+      border-radius: 8px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .memory-card.flipped {
+      background: #d6336c;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .memory-card.matched {
+      background: #f0c4d6;
+      color: #d6336c;
+      cursor: default;
+    }
+
+    .game-status {
+      text-align: center;
+      font-weight: 600;
+      color: #d6336c;
+      min-height: 24px;
+    }
+
+    /* REASONS & OPEN WHEN */
+    .reasons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .reason-card { background: #fdf5f8; border: 1px solid #f0c4d6; border-radius: 12px; padding: 15px 10px; text-align: center; font-size: 0.85rem; color: #d6336c; cursor: pointer; min-height: 70px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .reason-card.revealed { background: #d6336c; color: white; font-weight: 500; }
+    .letters-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .letter-btn { background: #fdf5f8; border: 1px solid #f0c4d6; border-radius: 10px; padding: 10px; font-size: 0.8rem; color: #d6336c; cursor: pointer; }
+    .letter-box { margin-top: 15px; background: #fff9fb; border-left: 4px solid #d6336c; padding: 15px; border-radius: 8px; font-size: 0.9rem; line-height: 1.5; animation: fadeIn 0.4s ease; }
+    .letter-box h3 { color: #d6336c; margin-bottom: 8px; }
+    .hidden { display: none; }
+
+    /* CHEER GAME */
+    .game-area { text-align: center; }
+    #heartBtn { font-size: 4rem; cursor: pointer; user-select: none; transition: transform 0.1s; display: inline-block; }
+    #heartBtn:active { transform: scale(0.9); }
+    .compliment { margin-top: 10px; font-style: italic; color: #d6336c; min-height: 24px; }
+
+    footer { text-align: center; color: #fff; font-size: 0.85rem; margin-top: 20px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .floating-heart {
+      position: fixed; bottom: -20px; font-size: 24px; pointer-events: none;
+      animation: floatUp 1.5s ease-in forwards; z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,20 +268,13 @@
     </div>
   </header>
 
-  <!-- MUSIC PLAYER WITH PLAYLIST -->
+  <!-- MUSIC PLAYER -->
   <section class="card music-card">
     <h2>🎵 Our Playlist</h2>
     <p>Pick a song and think of me.</p>
-    
     <div class="player-container">
-      <!-- The audio element is controlled by JavaScript now -->
       <audio id="bgMusic" loop></audio>
-      
-      <button id="playBtn" onclick="toggleMusic()" style="display: none;">▶ Play</button>
-      
-      <div class="playlist" id="playlist">
-        <!-- Songs will be loaded here by JavaScript -->
-      </div>
+      <div class="playlist" id="playlist"></div>
     </div>
   </section>
 
@@ -88,6 +330,246 @@
     <p>Made with care, for Alima</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    /* ==========================================
+       JAVASCRIPT - THE MAGIC
+    ========================================== */
+
+    // 1. MUSIC PLAYER
+    const playlistData = [
+      { 
+        title: "Mary On A Cross", 
+        artist: "Ghost",
+        src: "https://archive.org/download/ghost-mary-on-a-cross-official-audio/Ghost%20-%20Mary%20On%20A%20Cross%20(Official%20Audio).mp3" 
+      },
+      { 
+        title: "Die With A Smile", 
+        artist: "Lady Gaga & Bruno Mars",
+        src: "https://archive.org/download/lady-gaga-bruno-mars-die-with-a-smile/Lady%20Gaga%2C%20Bruno%20Mars%20-%20Die%20With%20A%20Smile.mp3" 
+      },
+      { 
+        title: "Golden", 
+        artist: "Harry Styles",
+        src: "https://archive.org/download/harry-styles-golden-official-audio/Harry%20Styles%20-%20Golden%20(Official%20Audio).mp3" 
+      },
+      { 
+        title: "Calm Down", 
+        artist: "Rema",
+        src: "https://archive.org/download/rema-calm-down/Rema%20-%20Calm%20Down.mp3" 
+      },
+      { 
+        title: "Snooze", 
+        artist: "SZA",
+        src: "https://archive.org/download/sza-snooze/SZA%20-%20Snooze.mp3" 
+      }
+    ];
+
+    const audioPlayer = document.getElementById("bgMusic");
+    const playlistContainer = document.getElementById("playlist");
+    let currentSongIndex = -1;
+
+    playlistData.forEach((song, index) => {
+      const div = document.createElement("div");
+      div.className = "song-item";
+      div.id = `song-${index}`;
+      div.innerHTML = `
+        <div class="song-info">
+          <strong>${song.title}</strong><br>
+          <span>${song.artist}</span>
+        </div>
+        <span class="play-icon">▶</span>
+      `;
+      div.onclick = () => playSong(index);
+      playlistContainer.appendChild(div);
+    });
+
+    function playSong(index) {
+      if (currentSongIndex === index) {
+        if (audioPlayer.paused) audioPlayer.play();
+        else audioPlayer.pause();
+      } else {
+        currentSongIndex = index;
+        audioPlayer.src = playlistData[index].src;
+        audioPlayer.play().catch(e => alert("Tap again to allow audio."));
+      }
+      updatePlayerUI();
+    }
+
+    function updatePlayerUI() {
+      const items = document.querySelectorAll(".song-item");
+      items.forEach((item, i) => {
+        if (i === currentSongIndex) {
+          item.classList.add("active");
+          item.querySelector(".play-icon").innerText = audioPlayer.paused ? "▶" : "❚❚";
+        } else {
+          item.classList.remove("active");
+          item.querySelector(".play-icon").innerText = "▶";
+        }
+      });
+    }
+
+    audioPlayer.onpause = updatePlayerUI;
+    audioPlayer.onplay = updatePlayerUI;
+    audioPlayer.onerror = () => {
+      alert("This song link is temporarily down. Please try another one!");
+      updatePlayerUI();
+    };
+
+    // 2. LOVE LETTER
+    function showLoveLetter() {
+      const letter = document.getElementById("hiddenLetter");
+      letter.classList.toggle("show");
+      const btn = document.querySelector(".love-btn");
+      btn.innerText = letter.classList.contains("show") ? "Close Letter ✉️" : "Open Letter 💌";
+    }
+
+    // 3. MEMORY MATCH GAME
+    const emojis = ["❤️", "🌹", "✨", "🧸", "🍫", "🌙"];
+    let memoryCards = [...emojis, ...emojis];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let lockBoard = false;
+
+    function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+
+    function initMemoryGame() {
+      const grid = document.getElementById("memoryGame");
+      grid.innerHTML = "";
+      memoryCards = shuffle(memoryCards);
+      flippedCards = [];
+      matchedPairs = 0;
+      lockBoard = false;
+      document.getElementById("gameStatus").innerText = "";
+
+      memoryCards.forEach((emoji, index) => {
+        const card = document.createElement("div");
+        card.classList.add("memory-card");
+        card.dataset.emoji = emoji;
+        card.dataset.index = index;
+        card.innerText = "?"; 
+        card.addEventListener("click", flipCard);
+        grid.appendChild(card);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard || this.classList.contains("flipped") || this.classList.contains("matched")) return;
+      this.classList.add("flipped");
+      this.innerText = this.dataset.emoji;
+      flippedCards.push(this);
+      if (flippedCards.length === 2) checkMatch();
+    }
+
+    function checkMatch() {
+      const [card1, card2] = flippedCards;
+      if (card1.dataset.emoji === card2.dataset.emoji) {
+        card1.classList.add("matched");
+        card2.classList.add("matched");
+        matchedPairs++;
+        flippedCards = [];
+        if (matchedPairs === emojis.length) {
+          document.getElementById("gameStatus").innerText = "You win! You're a perfect match! 💖";
+          confettiBurst();
+        }
+      } else {
+        lockBoard = true;
+        setTimeout(() => {
+          card1.classList.remove("flipped");
+          card2.classList.remove("flipped");
+          card1.innerText = "?";
+          card2.innerText = "?";
+          flippedCards = [];
+          lockBoard = false;
+        }, 1000);
+      }
+    }
+
+    initMemoryGame();
+
+    // 4. CHEER ME UP GAME
+    const gameCompliments = [
+      "You are glowing today.", "You matter more than you know.",
+      "You're doing better than you think.", "You are loved, deeply.",
+      "The world is better with you in it.", "You're enough, exactly as you are.",
+      "Someone is grateful for you today.", "Keep going. You're amazing."
+    ];
+
+    let score = 0;
+    function tapHeart() {
+      score++;
+      document.getElementById("score").innerText = `Smiles: ${score}`;
+      const random = gameCompliments[Math.floor(Math.random() * gameCompliments.length)];
+      document.getElementById("compliment").innerText = random;
+    }
+
+    // 5. FLOATING HEARTS MAGIC
+    document.body.addEventListener("click", function(e) {
+      if(e.target.closest('.card') || e.target.tagName === 'BUTTON') return;
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.innerText = ["❤️", "💖", "💕", "✨"][Math.floor(Math.random() * 4)];
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 1500);
+    });
+
+    function confettiBurst() {
+      for(let i=0; i<20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("div");
+          heart.classList.add("floating-heart");
+          heart.innerText = "🎉";
+          heart.style.left = Math.random() * window.innerWidth + "px";
+          heart.style.top = window.innerHeight / 2 + "px";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 1500);
+        }, i * 50);
+      }
+    }
+
+    // 6. REASONS WALL
+    const reasons = [
+      "You have a heart that cares deeply.", "Your smile can change someone's whole day.",
+      "You're resilient, even when things get hard.", "You make people feel comfortable being themselves.",
+      "You have great taste (especially in views).", "You're smarter than you give yourself credit for.",
+      "You bring peace into the lives of people around you.", "You never stop trying, and that's beautiful.",
+      "Your laugh is genuinely the best sound.", "You're loved more than you realize."
+    ];
+    const reasonsWall = document.getElementById("reasonsWall");
+    reasons.forEach((reason) => {
+      const card = document.createElement("div");
+      card.className = "reason-card";
+      card.innerText = "Tap to reveal";
+      card.onclick = () => {
+        card.innerText = reason;
+        card.classList.add("revealed");
+        card.onclick = null; 
+      };
+      reasonsWall.appendChild(card);
+    });
+
+    // 7. OPEN WHEN LETTERS
+    const letters = [
+      { title: "Open when you're sad", body: "I wish I could give you a massive hug right now. It's okay to feel sad. Let it out, take a deep breath, and remember that this feeling will pass. I'm always here." },
+      { title: "Open when you miss home", body: "Home is the warmth you carry inside you. Canada is just where you are right now; home is where your heart is. A big piece of my heart is always with you." },
+      { title: "Open when you can't sleep", body: "Put the phone down after this. Close your eyes and take a slow breath. You've done enough today. The world will wait for you to rest. Sweet dreams." },
+      { title: "Open when you need a laugh", body: "Remember that time we laughed so hard we couldn't breathe? Go watch a funny video. Life isn't that serious—we have to laugh through it!" },
+      { title: "Open when you're stressed", body: "Breathe. You are doing so much better than you think. Just pick one small thing to do today. You've survived 100% of your bad days so far." },
+      { title: "Open when you feel alone", body: "Even though we are in different time zones, I am always just a message away. Distance means nothing when someone means everything. You are not alone." }
+    ];
+    const lettersButtons = document.getElementById("lettersButtons");
+    const letterContent = document.getElementById("letterContent");
+    letters.forEach((letter) => {
+      const btn = document.createElement("button");
+      btn.className = "letter-btn";
+      btn.innerText = letter.title.replace("Open when ", "");
+      btn.onclick = () => {
+        letterContent.innerHTML = `<h3>${letter.title}</h3><p>${letter.body}</p>`;
+        letterContent.classList.remove("hidden");
+      };
+      lettersButtons.appendChild(btn);
+    });
+  </script>
 </body>
-</html>
+  </html>
